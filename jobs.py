@@ -1,0 +1,20 @@
+job_keywords = [
+    "software development engineer in test",
+    "software engineer in test",
+    "software engineer, test",
+    "test engineer",
+    "test automation engineer",
+    "qa engineer",
+    "sdet",
+    "software quality analyst engineer",
+    "test automation",
+    "quality assurance",
+    "quality engineer",
+    "automation engineer",
+    "test automation",
+    "principal qa",
+    "qa lead",
+    "Software Development Engineer in Test II",
+    "senior automation engineer, quality assurance",
+    "automation tester"
+]

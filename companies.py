@@ -1,0 +1,18 @@
+company_urls = [
+    "https://job-boards.eu.greenhouse.io/bvnk",
+    "https://www.1nebula.com/development",
+    "https://www.acrontum.com/careers/",
+    "https://www.afrihost.com/careers",
+    "https://spandigital.com/working-at-span/",
+    "https://job-boards.eu.greenhouse.io/bvnk",
+    "https://jobs.cisco.com/jobs/SearchJobs/?21178=%5B215431%5D&21178_format=6020&listFilterMode=1",
+    "https://www.clickatell.com/jobs/jobs-listing/",
+    "https://www.digicert.com/careers",
+    "https://dvtcareers.recruitee.com/",
+    "https://gadventures.wd3.myworkdayjobs.com/GAdventures?locations=e89ea7ddd373011868c94e9c1af60000&locations=e89ea7ddd373011868c960ad9ce40000",
+    "https://careers.ghost.org/",
+    "https://careers.ioco.tech/index/?sortBy=DPOSTINGSTART&sortOrder=desc",
+    "https://www.kingmakers.com/careers/",
+    "https://meltwatercareers.ttcportals.com/search/jobs/in/cape-town",
+    "https://kurtosys.bamboohr.com/careers",
+]
