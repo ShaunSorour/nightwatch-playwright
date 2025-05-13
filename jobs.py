@@ -16,5 +16,12 @@ job_keywords = [
     "qa lead",
     "Software Development Engineer in Test II",
     "senior automation engineer, quality assurance",
-    "automation tester"
+    "automation tester",
+    "senior quality engineer",
+    "tester",
+    "performance engineer",
+    "performance tester",
+    "performance test engineer",
+    "performance automation engineer",
+    "performance automation tester",
 ]
