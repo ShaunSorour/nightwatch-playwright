@@ -24,4 +24,5 @@ job_keywords = [
     "performance test engineer",
     "performance automation engineer",
     "performance automation tester",
+    "Quality Assurance & Automated Testing"
 ]
