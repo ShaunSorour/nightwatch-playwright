@@ -32,3 +32,16 @@ jobs:
         with:
           name: job-scan-results
           path: results/jobs_found.txt
+
+      - name: Send email with results
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: swsorour@hotmail.com
+          password: ${{ secrets.HOTMAIL_PASSWORD }}
+          subject: "Job Scan Results"
+          body: "Please find the attached job scan results."
+          to: swsorour@hotmail.com
+          from: swsorour@hotmail.com
+          attachments: results/jobs_found.txt
