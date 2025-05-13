@@ -52,7 +52,7 @@ company_urls = [
     "https://corporate.lightstone.co.za/careers",
     "https://payment24.co.za/careers/",
     "https://apply.workable.com/euromonitor/",
-    # "",
+    "https://jobs.mercedes-benz.com/en?en%3FPositionFormattedDescription.Content=automation&PositionLocation.Country=%5B501%5D&PositionFormattedDescription.Content=%22test%22",
     # "",
     # "",
     # "",

@@ -20,40 +20,42 @@ def match_keywords(title, keywords):
 
 
 def scan_job_page(url):
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+            page.goto(f"{url}", timeout=60000)
+            page.wait_for_timeout(5000)
 
-        page.goto(f"{url}", timeout=60000)
-        page.wait_for_timeout(5000)
+            job_titles = []
+            for job in page.query_selector_all("a"):
+                job_title = job.inner_text().strip()
+                for keyword in job_keywords:
+                    keyword_parts = keyword.split(",")
+                    if match_keywords(job_title, keyword_parts):
+                        job_titles.append(job_title)
 
-        job_titles = []
-        for job in page.query_selector_all("a"):
-            job_title = job.inner_text().strip()
-            for keyword in job_keywords:
-                keyword_parts = keyword.split(",")
-                if match_keywords(job_title, keyword_parts):
-                    job_titles.append(job_title)
+            if job_titles:
+                print(f"✅ Matching job titles on {url}:")
+                formatted_titles = "\n".join([f"- {title}" for title in job_titles])
+                print(formatted_titles)
 
-        if job_titles:
-            print(f"✅ Matching job titles on {url}:")
-            formatted_titles = "\n".join([f"- {title}" for title in job_titles])
-            print(formatted_titles)
+                # Write to file
+                with output_file.open("a", encoding="utf-8") as f:
+                    f.write("\n==============================\n")
+                    f.write(f"📍 {url}\n")
+                    for idx, title in enumerate(job_titles, start=1):
+                        f.write(f"  {idx}. {title}\n")
+                    f.write("==============================\n")
 
-            # Write to file
-            with output_file.open("a", encoding="utf-8") as f:
-                f.write("\n==============================\n")
-                f.write(f"📍 {url}\n")
-                for idx, title in enumerate(job_titles, start=1):
-                    f.write(f"  {idx}. {title}\n")
-                f.write("==============================\n")
+            else:
+                print(f"❌ No matching job titles on {url}.")
 
-        else:
-            print(f"❌ No matching job titles on {url}.")
+            browser.close()
 
-        browser.close()
-
+    except Exception as e:
+        print(f"⚠️ Skipping {url} due to error: {e}")
 
 
 def scan_github_jobs():
