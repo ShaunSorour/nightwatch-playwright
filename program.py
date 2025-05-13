@@ -1,8 +1,8 @@
 from playwright.sync_api import sync_playwright
 from datetime import datetime
 from pathlib import Path
-from companies import company_urls
-from jobs import job_keywords
+from companies.companies_local import company_urls
+from jobs.jobs import job_keywords
 
 # clear file
 Path("results/jobs_found.txt").write_text("", encoding="utf-8")
