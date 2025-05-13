@@ -26,3 +26,9 @@ jobs:
 
       - name: Run script
         run: python program.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: job-scan-results
+          path: results/jobs_found.txt
