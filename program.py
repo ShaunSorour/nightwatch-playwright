@@ -4,8 +4,10 @@ from pathlib import Path
 from companies.companies_local import company_urls
 from jobs.jobs import job_keywords
 
-# clear file
-Path("results/jobs_found.txt").write_text("", encoding="utf-8")
+# clear file and write timestamp
+timestamp = datetime.now().strftime("%A, %d %B %Y %H:%M:%S")
+header = f"📅 Job Scan Run - {timestamp}\n{'='*30}\n\n"
+Path("results/jobs_found.txt").write_text(header, encoding="utf-8")
 output_file = Path("results/jobs_found.txt")
 
 
