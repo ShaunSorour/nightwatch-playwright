@@ -3,11 +3,13 @@ name: Scan Jobs Pipeline
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 1,3,5"  # Runs daily at 09:00 UTC Mon/Wed/Fri
+    - cron: "0 9 * * 1,3,5"  # Runs at 09:00 UTC Mon/Wed/Fri
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -27,8 +29,14 @@ jobs:
       - name: Run script
         run: python program.py
 
-      - name: Upload results
-        uses: actions/upload-artifact@v4
+      - name: Prepare results for GitHub Pages
+        run: |
+          mkdir output
+          cp results/jobs_found.txt output/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: job-scan-results
-          path: results/jobs_found.txt
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          publish_branch: main
