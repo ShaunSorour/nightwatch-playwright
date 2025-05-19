@@ -1,0 +1,2 @@
+- check python interpreter on vscode correct ctrl-shift-p
+- check run icon using python
