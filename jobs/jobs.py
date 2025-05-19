@@ -24,5 +24,7 @@ job_keywords = [
     "performance test engineer",
     "performance automation engineer",
     "performance automation tester",
-    "Quality Assurance & Automated Testing"
+    "Quality Assurance & Automated Testing",
+    "Test Automation Engineer (Playwright) Spain",
+    "Load and Perfomance Test Automation Architect",
 ]

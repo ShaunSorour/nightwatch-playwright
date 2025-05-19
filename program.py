@@ -1,5 +1,7 @@
 from playwright.sync_api import sync_playwright
-from companies.companies_local import company_urls
+
+# from companies.companies_local import company_urls
+from companies.companies_foreign import company_urls
 from jobs.jobs import job_keywords
 from pdf_writer import PDFWriter
 
@@ -25,7 +27,7 @@ def scan_job_page(url):
             page.wait_for_timeout(5000)
 
             job_titles = []
-            for job in page.query_selector_all("a"):
+            for job in page.query_selector_all("a, h3, h4, h5"):
                 job_title = job.inner_text().strip()
                 for keyword in job_keywords:
                     keyword_parts = keyword.split(",")
