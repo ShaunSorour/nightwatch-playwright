@@ -33,7 +33,7 @@ jobs:
       - name: Prepare results for GitHub Pages
         run: |
           mkdir output
-          cp results/jobs_found.txt output/
+          cp results/jobs_found.pdf output/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
