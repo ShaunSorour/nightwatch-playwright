@@ -1,14 +1,9 @@
 from playwright.sync_api import sync_playwright
-from datetime import datetime
-from pathlib import Path
 from companies.companies_local import company_urls
 from jobs.jobs import job_keywords
+from pdf_writer import PDFWriter
 
-# clear file and write timestamp
-timestamp = datetime.now().strftime("%A, %d %B %Y %H:%M:%S")
-header = f"📅 {timestamp}\n{'='*30}\n\n"
-Path("results/jobs_found.txt").write_text(header, encoding="utf-8")
-output_file = Path("results/jobs_found.txt")
+pdf_writer = PDFWriter()
 
 
 def normalize_text(text):
@@ -17,7 +12,6 @@ def normalize_text(text):
 
 def match_keywords(title, keywords):
     normalized_title = normalize_text(title)
-
     return all(keyword.lower() in normalized_title for keyword in keywords)
 
 
@@ -40,17 +34,9 @@ def scan_job_page(url):
 
             if job_titles:
                 print(f"✅ Matching job titles on {url}:")
-                formatted_titles = "\n".join([f"- {title}" for title in job_titles])
-                print(formatted_titles)
-
-                # Write to file
-                with output_file.open("a", encoding="utf-8") as f:
-                    f.write("\n==============================\n")
-                    f.write(f"📍 {url}\n")
-                    for idx, title in enumerate(job_titles, start=1):
-                        f.write(f"  {idx}. {title}\n")
-                    f.write("==============================\n")
-
+                for title in job_titles:
+                    print(f"- {title}")
+                pdf_writer.write_url_and_jobs(url, job_titles)
             else:
                 print(f"❌ No matching job titles on {url}.")
 
@@ -67,3 +53,4 @@ def scan_github_jobs():
 
 if __name__ == "__main__":
     scan_github_jobs()
+    pdf_writer.save()
