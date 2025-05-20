@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 from companies.companies_local import company_urls
 from jobs.jobs import job_keywords
 from pdf_writer import PDFWriter
-from linkedin import login_to_linkedin 
+from linkedin import scan_linkedin_jobs
 
 pdf_writer = PDFWriter()
 
@@ -53,14 +53,7 @@ def scan_github_jobs(playwright):
 
 
 if __name__ == "__main__":
-    with sync_playwright() as playwright:
-        # Optional: LinkedIn login before scanning other jobs
-        login_browser, login_context, login_page = login_to_linkedin(playwright)
-
-        # Now scan your other job sites
-        # scan_github_jobs(playwright)
-
-        pdf_writer.save()
-
-        if login_browser:
-            login_browser.close()
+    with sync_playwright() as p:
+        # scan_github_jobs(p)
+        scan_linkedin_jobs(p)
+    pdf_writer.save()
