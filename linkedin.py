@@ -40,16 +40,15 @@ def login_to_linkedin(playwright):
 
 def scan_linkedin_jobs(playwright):
     print("🔍 Scanning LinkedIn jobs...")
-    browser, context, page = login_to_linkedin(playwright)
+    try:
+        browser, context, page = login_to_linkedin(playwright)
 
-    job_links = page.query_selector_all("a.job-card-container__link")
+        job_links = page.query_selector_all("a.job-card-container__link")
+        jobs = []
 
-    jobs = []
+        print(f"Debug: {len(job_links)} job links found.")
 
-    print(f"Debug: {len(job_links)} job links found.")
-
-    for job_link in job_links:
-        try:
+        for job_link in job_links:
             href = job_link.get_attribute("href")
             strong_tag = job_link.query_selector("strong")
             if not strong_tag:
@@ -75,16 +74,15 @@ def scan_linkedin_jobs(playwright):
                 full_url = href if href.startswith("http") else f"https://www.linkedin.com{href}"
                 jobs.append((title, full_url))
 
-        except Exception as e:
-            print(f"⚠️ Error processing job link: {e}")
+        if jobs:
+            print("✅ Extracted job titles and links:")
+            for title, url in jobs:
+                print(f"- {title}: {url}")
+            pdf_writer.write_jobs_to_pdf(jobs)
+        else:
+            print("❌ No job titles and links found on LinkedIn.")
 
-    if jobs:
-        print("✅ Extracted job titles and links:")
-        for title, url in jobs:
-            print(f"- {title}: {url}")
-        pdf_writer.write_jobs_to_pdf(jobs)
-    else:
-        print("❌ No job titles and links found on LinkedIn.")
-
-    browser.close()
+        browser.close()
+    except Exception as e:
+        print(f"⚠️ LinkedIn scan failed: {e}")
 

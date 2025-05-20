@@ -7,6 +7,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.colors import blue
 import PyPDF2
+import os
 
 
 class PDFWriter:
@@ -85,13 +86,26 @@ class PDFWriter:
     def merge_pdfs(self, pdf1_path, pdf2_path, output_path):
         merger = PyPDF2.PdfMerger()
 
-        merger.append(pdf1_path)
-        merger.append(pdf2_path)
+        files_added = 0
 
-        with open(output_path, 'wb') as output_file:
-            merger.write(output_file)
+        if os.path.exists(pdf1_path):
+            merger.append(pdf1_path)
+            files_added += 1
+        else:
+            print(f"Warning: {pdf1_path} not found. Skipping.")
 
-        print(f"PDFs merged successfully into {output_path}")
+        if os.path.exists(pdf2_path):
+            merger.append(pdf2_path)
+            files_added += 1
+        else:
+            print(f"Warning: {pdf2_path} not found. Skipping.")
+
+        if files_added > 0:
+            with open(output_path, 'wb') as output_file:
+                merger.write(output_file)
+            print(f"PDFs merged successfully into {output_path}")
+        else:
+            print("No input PDFs were found. Merge not performed.")
 
     def _new_page(self):
         self.c.showPage()
