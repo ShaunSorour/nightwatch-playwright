@@ -31,7 +31,7 @@ def login_to_linkedin(playwright):
     page.fill("input#password", LINKEDIN_PASSWORD)
     page.click("button[type='submit']")
     page.wait_for_url("https://www.linkedin.com/feed/", timeout=15000)
-    page.goto("https://www.linkedin.com/jobs/search/?currentJobId=4205806439&distance=25&geoId=104035573&keywords=Software%20Developer%20In%20Test&origin=JOBS_HOME_KEYWORD_HISTORY&refresh=true", timeout=60000)
+    page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3916036838&f_TPR=r604800&geoId=104231451&keywords=Software%20Developer%20In%20Test&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true", timeout=60000)
     page.wait_for_timeout(2000)
 
     print("✅ Logged in to LinkedIn")
@@ -41,22 +41,36 @@ def login_to_linkedin(playwright):
 def scan_linkedin_jobs(playwright):
     browser, context, page = login_to_linkedin(playwright)
 
-    # Select all relevant job links
     job_links = page.query_selector_all("a.job-card-container__link")
 
     jobs = []
 
+    print(f"Debug: {len(job_links)} job links found.")
+
     for job_link in job_links:
         try:
             href = job_link.get_attribute("href")
-            # Find the strong tag inside this a tag
             strong_tag = job_link.query_selector("strong")
             if not strong_tag:
                 continue
             title = strong_tag.inner_text().strip()
 
+            job_card_handle = job_link.evaluate_handle(
+                """(node) => {
+                    while (node && !node.classList.contains('artdeco-entity-lockup__content')) {
+                        node = node.parentElement;
+                    }
+                    return node;
+                }"""
+            )
+
+            company_span = job_card_handle.query_selector(".artdeco-entity-lockup__subtitle span")
+            company_name = company_span.inner_text().strip() if company_span else None
+
+            if company_name:
+                title = f"{company_name} - {title}"
+
             if href and title:
-                # Complete relative URLs if necessary
                 full_url = href if href.startswith("http") else f"https://www.linkedin.com{href}"
                 jobs.append((title, full_url))
 
