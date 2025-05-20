@@ -27,6 +27,8 @@ jobs:
           playwright install chromium
           pip install reportlab
           pip install python-dotenv
+          pip install fpdf
+          pip install PyPDF2
 
       - name: Run script
         run: python program.py
