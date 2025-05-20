@@ -2,6 +2,11 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from datetime import datetime
 from pathlib import Path
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.colors import blue
+import PyPDF2
 
 
 class PDFWriter:
@@ -44,34 +49,49 @@ class PDFWriter:
         self.y -= self.line_height
 
 
-    def write_jobs_with_links(self, url, jobs):
-        print(f"Writing jobs to PDF: {jobs}")
+    def write_jobs_to_pdf(self, jobs_list, filename="results/linkedin_jobs.pdf"):
         """
-        Writes the main page URL and a list of (title, job_url) pairs
-        to the PDF, each job title linked to its URL.
+        Writes a list of job titles with embedded links to a PDF document
+        using ReportLab's platypus engine.
+
+        Args:
+            jobs_list (list): A list of tuples, where each tuple contains
+                              (job_title, job_link).
+            filename (str): Optional override for the output PDF file name.
         """
-        if self.y < 60:
-            self._new_page()
+        output_path = Path(filename)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        self.c.setFont("Helvetica-Bold", 11)
-        self.c.drawString(40, self.y, f"📍 {url}")
-        self.c.linkURL(url, (40, self.y - 2, 540, self.y + 10), relative=0)
-        self.y -= self.line_height * 1.5
+        doc = SimpleDocTemplate(str(output_path), pagesize=letter)
+        styles = getSampleStyleSheet()
+        story = []
 
-        self.c.setFont("Helvetica", 10)
-        for idx, (title, job_url) in enumerate(jobs, start=1):
-            line_text = f"{idx}. {title}"
-            self.c.drawString(60, self.y, line_text)
-            text_width = self.c.stringWidth(line_text, "Helvetica", 10)
-            # Add clickable link only over the title text
-            self.c.linkURL(job_url, (60, self.y - 2, 60 + text_width, self.y + 10), relative=0)
-            self.y -= self.line_height
+        link_style = styles['Normal']
+        link_style.textColor = blue
+        link_style.underline = 1
 
-            if self.y < 40:
-                self._new_page()
+        story.append(Paragraph("<b>Linkedin :</b>", styles['h2']))
+        story.append(Paragraph("<br/>", styles['Normal']))  # Add some space
 
-        self.y -= self.line_height
+        for title, link in jobs_list:
+            p_text = f'<link href="{link}">{title}</link>'
+            story.append(Paragraph(p_text, link_style))
+            story.append(Paragraph("<br/>", styles['Normal']))  # Line break
 
+        doc.build(story)
+        print(f"PDF '{output_path}' created successfully with job listings.")
+
+
+    def merge_pdfs(self, pdf1_path, pdf2_path, output_path):
+        merger = PyPDF2.PdfMerger()
+
+        merger.append(pdf1_path)
+        merger.append(pdf2_path)
+
+        with open(output_path, 'wb') as output_file:
+            merger.write(output_file)
+
+        print(f"PDFs merged successfully into {output_path}")
 
     def _new_page(self):
         self.c.showPage()

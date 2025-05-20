@@ -4,6 +4,7 @@ from jobs.jobs import job_keywords
 from pdf_writer import PDFWriter
 from linkedin import scan_linkedin_jobs
 
+
 pdf_writer = PDFWriter()
 
 
@@ -34,6 +35,7 @@ def scan_job_page(url, page):
             for title in job_titles:
                 print(f"- {title}")
             pdf_writer.write_url_and_jobs(url, job_titles)
+            pdf_writer.save()
         else:
             print(f"❌ No matching job titles on {url}.")
 
@@ -54,6 +56,6 @@ def scan_github_jobs(playwright):
 
 if __name__ == "__main__":
     with sync_playwright() as p:
-        # scan_github_jobs(p)
+        scan_github_jobs(p)
         scan_linkedin_jobs(p)
-    pdf_writer.save()
+        pdf_writer.merge_pdfs('results/jobs_found.pdf', 'results/linkedin_jobs.pdf', 'results/final.pdf')
