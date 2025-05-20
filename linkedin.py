@@ -30,7 +30,7 @@ def login_to_linkedin(playwright):
     page.fill("input#username", LINKEDIN_EMAIL)
     page.fill("input#password", LINKEDIN_PASSWORD)
     page.click("button[type='submit']")
-    page.wait_for_url("https://www.linkedin.com/feed/", timeout=15000)
+    page.wait_for_url("https://www.linkedin.com/feed/", timeout=60000)
     page.goto("https://www.linkedin.com/jobs/search/?currentJobId=3916036838&f_TPR=r604800&geoId=104231451&keywords=Software%20Developer%20In%20Test&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true", timeout=60000)
     page.wait_for_timeout(2000)
 

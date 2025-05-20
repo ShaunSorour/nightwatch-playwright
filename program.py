@@ -35,7 +35,6 @@ def scan_job_page(url, page):
             for title in job_titles:
                 print(f"- {title}")
             pdf_writer.write_url_and_jobs(url, job_titles)
-            pdf_writer.save()
         else:
             print(f"❌ No matching job titles on {url}.")
 
@@ -52,6 +51,7 @@ def scan_github_jobs(playwright):
         scan_job_page(url, page)
 
     browser.close()
+    pdf_writer.save()
 
 
 if __name__ == "__main__":
