@@ -1,14 +1,8 @@
-from playwright.sync_api import sync_playwright
-from jobs.jobs import job_keywords
-from pdf_writer import PDFWriter
+from utilities.pdf_writer import PDFWriter
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
-LINKEDIN_EMAIL = os.getenv("LINKEDIN_EMAIL")
-LINKEDIN_PASSWORD = os.getenv("LINKEDIN_PASSWORD")
-
 pdf_writer = PDFWriter()
 
 
@@ -22,6 +16,9 @@ def match_keywords(title, keywords):
 
 
 def login_to_linkedin(playwright):
+    LINKEDIN_EMAIL = os.getenv("LINKEDIN_EMAIL")
+    LINKEDIN_PASSWORD = os.getenv("LINKEDIN_PASSWORD")
+
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
