@@ -42,7 +42,8 @@ def scan_job_page(url, page):
         print(f"⚠️ Skipping {url} due to error: {e}")
 
 
-def scan_github_jobs(playwright):
+def scan_company_careers(playwright):
+    print("🔍 Scanning company careers pages...")
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
@@ -56,6 +57,6 @@ def scan_github_jobs(playwright):
 
 if __name__ == "__main__":
     with sync_playwright() as p:
-        scan_github_jobs(p)
+        scan_company_careers(p)
         scan_linkedin_jobs(p)
         pdf_writer.merge_pdfs('results/jobs_found.pdf', 'results/linkedin_jobs.pdf', 'results/final.pdf')

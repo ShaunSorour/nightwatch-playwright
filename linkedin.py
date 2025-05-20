@@ -39,6 +39,7 @@ def login_to_linkedin(playwright):
 
 
 def scan_linkedin_jobs(playwright):
+    print("🔍 Scanning LinkedIn jobs...")
     browser, context, page = login_to_linkedin(playwright)
 
     job_links = page.query_selector_all("a.job-card-container__link")
