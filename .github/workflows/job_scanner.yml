@@ -8,6 +8,9 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    env:
+      LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
+      LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
     permissions:
       contents: write
 
@@ -26,6 +29,9 @@ jobs:
           pip install playwright
           playwright install chromium
           pip install reportlab
+          pip install python-dotenv
+          pip install fpdf
+          pip install PyPDF2
 
       - name: Run script
         run: python program.py
@@ -33,7 +39,13 @@ jobs:
       - name: Prepare results for GitHub Pages
         run: |
           mkdir output
-          cp results/jobs_found.pdf output/
+          cp results/final.pdf output/
+          
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-scan-final-pdf
+          path: results/final.pdf
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
