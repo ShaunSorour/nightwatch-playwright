@@ -73,9 +73,7 @@ def scan_linkedin_jobs(playwright):
 
         if jobs:
             print("✅ Extracted job titles and links:")
-            for title, url in jobs:
-                print(f"- {title}: {url}")
-            pdf_writer.write_jobs_to_pdf(jobs)
+            pdf_writer.write_jobs_to_pdf(jobs, 'Linkedin', 'results/linkedin_jobs.pdf')
         else:
             print("❌ No job titles and links found on LinkedIn.")
 

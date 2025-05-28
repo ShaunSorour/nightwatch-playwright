@@ -27,7 +27,6 @@ class PDFWriter:
         self.c.drawString(40, self.y, f"📅 {timestamp}")
         self.y -= self.line_height * 2
 
-
     def write_url_and_jobs(self, url, job_titles):
         print(f"Writing URL and jobs to PDF: {url}, {job_titles}")
         if self.y < 60:
@@ -49,8 +48,7 @@ class PDFWriter:
 
         self.y -= self.line_height
 
-
-    def write_jobs_to_pdf(self, jobs_list, filename="results/linkedin_jobs.pdf"):
+    def write_jobs_to_pdf(self, jobs_list, page_title, filename):
         """
         Writes a list of job titles with embedded links to a PDF document
         using ReportLab's platypus engine.
@@ -67,23 +65,22 @@ class PDFWriter:
         styles = getSampleStyleSheet()
         story = []
 
-        link_style = styles['Normal']
+        link_style = styles["Normal"]
         link_style.textColor = blue
         link_style.underline = 1
 
-        story.append(Paragraph("<b>Linkedin :</b>", styles['h2']))
-        story.append(Paragraph("<br/>", styles['Normal']))  # Add some space
+        story.append(Paragraph(f"<b>{page_title} :</b>", styles["h2"]))
+        story.append(Paragraph("<br/>", styles["Normal"]))  # Add some space
 
         for title, link in jobs_list:
             p_text = f'<link href="{link}">{title}</link>'
             story.append(Paragraph(p_text, link_style))
-            story.append(Paragraph("<br/>", styles['Normal']))  # Line break
+            story.append(Paragraph("<br/>", styles["Normal"]))  # Line break
 
         doc.build(story)
         print(f"PDF '{output_path}' created successfully with job listings.")
 
-
-    def merge_pdfs(self, pdf1_path, pdf2_path, output_path):
+    def merge_pdfs(self, pdf1_path, pdf2_path, pdf3_path, output_path):
         merger = PyPDF2.PdfMerger()
 
         files_added = 0
@@ -100,8 +97,14 @@ class PDFWriter:
         else:
             print(f"Warning: {pdf2_path} not found. Skipping.")
 
+        if os.path.exists(pdf3_path):
+            merger.append(pdf3_path)
+            files_added += 1
+        else:
+            print(f"Warning: {pdf3_path} not found. Skipping.")
+
         if files_added > 0:
-            with open(output_path, 'wb') as output_file:
+            with open(output_path, "wb") as output_file:
                 merger.write(output_file)
             print(f"PDFs merged successfully into {output_path}")
         else:
