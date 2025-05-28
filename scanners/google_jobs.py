@@ -5,7 +5,7 @@ pdf_writer = PDFWriter()
 def scan_google_jobs(playwright):
     print("🔍 Scanning Google job search results...")
     try:
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
         context = browser.new_context()
         page = context.new_page()
 
