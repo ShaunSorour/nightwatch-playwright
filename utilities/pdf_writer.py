@@ -83,29 +83,28 @@ class PDFWriter:
         print(f"PDF '{output_path}' created successfully with job listings.")
 
 
-    def merge_pdfs(self, pdf1_path, pdf2_path, output_path):
+    def merge_pdfs(self, output_path):
+        """
+        Merges all PDF files in the 'results' directory into a single PDF.
+
+        Args:
+            output_path (str): The path for the merged output PDF.
+        """
         merger = PyPDF2.PdfMerger()
+        results_dir = Path("results")
+        pdf_files = sorted(results_dir.glob("*.pdf"))
 
-        files_added = 0
+        if not pdf_files:
+            print("No PDF files found in 'results' directory. Merge not performed.")
+            return
 
-        if os.path.exists(pdf1_path):
-            merger.append(pdf1_path)
-            files_added += 1
-        else:
-            print(f"Warning: {pdf1_path} not found. Skipping.")
+        for pdf_file in pdf_files:
+            print(f"Adding {pdf_file} to merger.")
+            merger.append(str(pdf_file))
 
-        if os.path.exists(pdf2_path):
-            merger.append(pdf2_path)
-            files_added += 1
-        else:
-            print(f"Warning: {pdf2_path} not found. Skipping.")
-
-        if files_added > 0:
-            with open(output_path, 'wb') as output_file:
-                merger.write(output_file)
-            print(f"PDFs merged successfully into {output_path}")
-        else:
-            print("No input PDFs were found. Merge not performed.")
+        with open(output_path, "wb") as output_file:
+            merger.write(output_file)
+        print(f"PDFs merged successfully into {output_path}")
 
     def _new_page(self):
         self.c.showPage()

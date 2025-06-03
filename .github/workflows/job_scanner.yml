@@ -32,6 +32,8 @@ jobs:
           pip install python-dotenv
           pip install fpdf
           pip install PyPDF2
+          pip install -U python-jobspy
+          pip install pandas
 
       - name: Run script
         run: python program.py
