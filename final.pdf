@@ -20,11 +20,11 @@ endobj
 endobj
 4 0 obj
 <<
-/Annots [ 5 0 R 6 0 R 7 0 R ]
-/Contents 8 0 R
+/Annots [ 5 0 R 6 0 R ]
+/Contents 7 0 R
 /MediaBox [ 0 0 595.2756 841.8898 ]
 /Resources <<
-/Font 9 0 R
+/Font 8 0 R
 /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >>
 /Rotate 0
@@ -62,34 +62,21 @@ endobj
 endobj
 7 0 obj
 <<
-/A <<
-/S /URI
-/Type /Action
-/URI (https\072\057\057lulalend\056breezy\056hr\057)
+/Filter [ /ASCII85Decode /FlateDecode ]
+/Length 464
 >>
-/Border [ 0 0 0 ]
-/Rect [ 40 603.8898 540 615.8898 ]
-/Subtype /Link
-/Type /Annot
->>
+stream
+GatUo>Ao*I(l%MX(#L<AZr"n:n(cn<(Ukrh?8!:uG(GrE$$!_/*LRQU(["+O8Ep$4mIpSb94,3B-TSs_"nM`s[XkR]43.H6J/KB7lZV_Xr^Jj_";XHm0FiWqH94.@DMT7)ml_WmB[*P6g((qCn5Kc"[Um'Y3>5jtXItR#gMRPWjpA>?Hh]cbluB8CgZ.c,Cm6ELM.nkBKAsQ&C/`/$Om"#FAPpNHeUf<s.^W&uG$I\$c"_5]V*&&+*WM?Z0ETBH"k-Ys4AoDkR#*[:N0T1N0#2K$!;dZ7g$:B62$!"3!R@Nl$\WfApj^03R>doBY&"n!r?8:RRBTDKCNm=7+,Q5[O^bLt@$I'QN0^/4n9$2G_@3tak2TqM8"H7?T'G)??jP`";Co"ZUn:Q$[P2!ABBSQ*psa+%l^;=hX@rMEr/,Rn;pRNFbhl_BkG*^#)W"!!N`/>NFRh-\";Q_/HN~>
+endstream
 endobj
 8 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ]
-/Length 534
+/F1 9 0 R
+/F2 10 0 R
+/F3 11 0 R
 >>
-stream
-GatUo9i%iE'ScA]MR16jZ)(8\Ap0qHUD]&G]"+<"1=W!Vck7`Mj0,p)Fhg<'BLj%>c?\u$SsFnB+4@@Y'&\uT^*#['@#mQ$U;0fKcAqaLDfVJ_,,bmS92HVS@pl,bpHOm(l581R$'#*H>%N(C"4r1k<XJ8#0*%=kI(GtZho5R'A!"F\8)@d8..YD57chN)it%4j;`+rA]<4M8fh%C:.9^NZ`3HHp?(4kd,=R6*;\gHbfr;MFDB`%n6O!)U:_#e,6t9WX)I7A.[=WJ-O\1FUN#_t5YQK,7!Ve`<NrKamM08mq?,/CPL%5(b_D[*CH-nNV5`e-"O1JYUHsKp",sL?=P8Q==c3iV9(@'s(YoRj`laFZe1]h$eXq&r!7_uga[fO\qfeu<a%@l([9Sk>P+-KF_)MVe[lkJbT'WGtcHU5Bad:hG/)\0%Mh6&q[p&0<V]@N>+WOPo_$[.0[#qjq`(ID[]XbD#RU:eJN$4H!,,V0O"l5K)Wj($iA)fXZ?NUb:3Y66Q8W>YV>%\gbd1GifJ_>~>
-endstream
 endobj
 9 0 obj
-<<
-/F1 10 0 R
-/F2 11 0 R
-/F3 12 0 R
->>
-endobj
-10 0 obj
 <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
@@ -98,7 +85,7 @@ endobj
 /Type /Font
 >>
 endobj
-11 0 obj
+10 0 obj
 <<
 /BaseFont /Helvetica-Bold
 /Encoding /WinAnsiEncoding
@@ -107,7 +94,7 @@ endobj
 /Type /Font
 >>
 endobj
-12 0 obj
+11 0 obj
 <<
 /BaseFont /ZapfDingbats
 /Name /F3
@@ -116,26 +103,25 @@ endobj
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000015 00000 n 
 0000000074 00000 n 
 0000000114 00000 n 
 0000000163 00000 n 
-0000000392 00000 n 
-0000000602 00000 n 
-0000000851 00000 n 
-0000001037 00000 n 
-0000001662 00000 n 
-0000001716 00000 n 
-0000001824 00000 n 
-0000001937 00000 n 
+0000000386 00000 n 
+0000000596 00000 n 
+0000000845 00000 n 
+0000001400 00000 n 
+0000001453 00000 n 
+0000001560 00000 n 
+0000001673 00000 n 
 trailer
 <<
-/Size 13
+/Size 12
 /Root 3 0 R
 /Info 2 0 R
 >>
 startxref
-2021
+1757
 %%EOF
