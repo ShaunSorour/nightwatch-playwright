@@ -72,7 +72,7 @@ company_urls = [
     "https://www.structureit.net/careers/",
     "https://scrumsdotcom.recruitee.com/",
     "https://jobs.lever.co/titanwh?location=Cape%20Town",
-    # "",
+    "https://careers.capitecbank.co.za/search/?createNewAlert=false&q=&locationsearch=cape+town&optionsFacetsDD_title=&optionsFacetsDD_location=&optionsFacetsDD_department=",
     # "",
     # "",
     # "",
