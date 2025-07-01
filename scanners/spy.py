@@ -25,6 +25,8 @@ def spy():
     # --- CSV to PDF conversion ---
     df = pd.read_csv("jobs.csv")
     df = df[["title", "job_url", "company"]]
+    df[["job_url", "company"]] = df[["company", "job_url"]]
+    df = df[["title", "company", "job_url"]]
 
     fig, ax = plt.subplots(figsize=(12, min(0.5 * len(df), 50)))
     ax.xaxis.set_visible(False)
