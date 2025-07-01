@@ -9,7 +9,7 @@ pdf_writer = PDFWriter()
 
 if __name__ == "__main__":
     with sync_playwright() as p:
-        scan_company_careers(p)
-        scan_linkedin_jobs(p)
+        # scan_company_careers(p)
+        # scan_linkedin_jobs(p)
         spy()
         pdf_writer.merge_pdfs('results/final.pdf')

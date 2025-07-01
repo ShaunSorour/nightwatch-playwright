@@ -20,12 +20,17 @@ def spy():
     )
     print(f"Found {len(jobs)} jobs")
     print(jobs.head())
-    jobs.to_csv("jobs.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False) # to_excel
+    jobs.to_csv("jobs.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
 
-    # --- CSV to PDF conversion ---
+    # --- Swap columns and contents before PDF conversion ---
     df = pd.read_csv("jobs.csv")
     df = df[["title", "job_url", "company"]]
+    # Swap the contents of 'job_url' and 'company'
+    df[["job_url", "company"]] = df[["company", "job_url"]]
+    # Save the swapped DataFrame back to CSV (optional, for verification)
+    df.to_csv("jobs_swapped.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
 
+    # Use the swapped DataFrame for PDF conversion
     fig, ax = plt.subplots(figsize=(12, min(0.5 * len(df), 50)))
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
