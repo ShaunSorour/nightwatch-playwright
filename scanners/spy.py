@@ -24,7 +24,7 @@ def spy():
 
     # --- Swap columns and contents before PDF conversion ---
     df = pd.read_csv("jobs.csv")
-    df = df[["title", "company", "url"]]
+    df = df[["title", "job_url", "company"]]
     # Swap the contents of 'job_url' and 'company'
     df[["job_url", "company"]] = df[["company", "job_url"]]
     # Save the swapped DataFrame back to CSV (optional, for verification)
