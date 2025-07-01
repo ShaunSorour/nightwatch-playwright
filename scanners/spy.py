@@ -5,7 +5,7 @@ from jobspy import scrape_jobs
 
 
 # JOBSPY MODULE - GITHUB
-# ############
+# ----------------------
 def spy():
     print("🔍 Scanning SPY...")
 
@@ -22,15 +22,17 @@ def spy():
     print(jobs.head())
     jobs.to_csv("jobs.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
 
-    # --- Swap columns and contents before PDF conversion ---
+    # swap before conversion
     df = pd.read_csv("jobs.csv")
     df = df[["title", "job_url", "company"]]
-    # Swap the contents of 'job_url' and 'company'
+    # contents 
     df[["job_url", "company"]] = df[["company", "job_url"]]
-    # Save the swapped DataFrame back to CSV (optional, for verification)
+    # column headers
+    df = df.rename(columns={"job_url": "company_tmp", "company": "job_url"})
+    df = df.rename(columns={"company_tmp": "company"})
+    # save
     df.to_csv("jobs_swapped.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
 
-    # Use the swapped DataFrame for PDF conversion
     fig, ax = plt.subplots(figsize=(12, min(0.5 * len(df), 50)))
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
