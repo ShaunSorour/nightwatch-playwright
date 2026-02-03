@@ -9,10 +9,20 @@ from jobspy import scrape_jobs
 def spy():
     print("🔍 Scanning SPY...")
 
+    # jobs = scrape_jobs(
+    #     site_name=["indeed", "linkedin", "google"],
+    #     search_term="QA Engineer",
+    #     google_search_term="QA Engineer jobs near Cape Town, South Africa since yesterday",
+    #     location="Cape Town, South Africa",
+    #     results_wanted=100,
+    #     hours_old=72,
+    #     country_indeed='south africa',
+    # )
+
     jobs = scrape_jobs(
         site_name=["indeed", "linkedin", "google"],
-        search_term="QA Engineer",
-        google_search_term="QA Engineer jobs near Cape Town, South Africa since yesterday",
+        search_term="Managing Editor",
+        google_search_term="Managing Editor jobs near Cape Town, South Africa since yesterday",
         location="Cape Town, South Africa",
         results_wanted=100,
         hours_old=72,
